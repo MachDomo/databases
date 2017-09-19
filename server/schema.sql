@@ -10,48 +10,25 @@ CREATE TABLE messages (
   /* Describe your table here.*/
   id INT AUTO_INCREMENT PRIMARY KEY,
   text TEXT(200) NOT NULL,
-  createdAt datetime NOT NULL
+  username TEXT NOT NULL,
+  roomname varchar(20) NOT NULL DEFAULT "lobby"
 );
+
+# todo: must refactor to declare the trigger before trying ot use it.
+# todo: Must refactor to also reference the table after it is created.
+
+-- createdat datetime DEFAULT(getdate()),
+
+-- CREATE TRIGGER getdate
+-- ON chat.myTable
+-- FOR UPDATE
+-- AS
+-- BEGIN
+--    IF NOT UPDATE(updatedDate)
+--        UPDATE dbo.myTable SET createdat = GETDATE()
+--        WHERE col1 IN (SELECT col1 FROM inserted)
+-- END
+
 
 /* Create other tables and define schemas for them here! */
 
-DROP TABLE IF EXISTS `users`;
-
-CREATE TABLE users (
-  /* Describe your table here.*/
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  username TEXT(20)
-);
-
-DROP TABLE IF EXISTS `rooms`;
-
-CREATE TABLE rooms (
-  /* Describe your table here.*/
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  rooms TEXT(20) NOT NULL
-);
-
-DROP TABLE IF EXISTS `users_messages`;
-
-CREATE TABLE users_messages (
-  /* Describe your table here.*/
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  user_id INT,
-  messages_id INT
-);
-
-DROP TABLE IF EXISTS `messages_rooms`;
-
-CREATE TABLE messages_rooms (
-  /* Describe your table here.*/
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  messages_id INT,
-  rooms_id INT
-
-
-);
-
-ALTER TABLE `users_messages` ADD FOREIGN KEY (user_id) REFERENCES `users` (`id`);
-ALTER TABLE `users_messages` ADD FOREIGN KEY (messages_id) REFERENCES `messages` (`id`);
-ALTER TABLE `messages_rooms` ADD FOREIGN KEY (messages_id) REFERENCES `messages` (`id`);
-ALTER TABLE `messages_rooms` ADD FOREIGN KEY (rooms_id) REFERENCES `rooms` (`id`);
