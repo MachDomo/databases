@@ -8,11 +8,10 @@ module.exports = {
     get: function (req, res) {
       // get all the messages
       db.query('select * from messages', function(err, rows, fields) {
-        console.log(JSON.stringify(rows));
         if (err) {
           res.end(`There was an error: ${err.message}`);
         } else {
-          res.end(JSON.stringify(rows));
+          res.end(JSON.stringify({results: rows}));
         }
       });
     }, // a function which handles a get request for all messages
