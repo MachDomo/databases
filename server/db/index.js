@@ -6,4 +6,11 @@ var credentials = require('../spec/credentials.js');
 
 var dbConnection = mysql.createConnection(credentials);
 
+dbConnection.connect(function(err) {
+  if (err) {
+    console.log(err);
+  }
+  console.log('Connected');
+});
+
 module.exports = dbConnection;
